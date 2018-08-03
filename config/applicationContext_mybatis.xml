@@ -3,14 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
-		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
@@ -19,41 +16,42 @@
 <context:property-placeholder location="classpath:jdbc.properties"/>
 <!-- 数据库连接池 -->
 <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-	<property name="driver" value="${jdbc.driver}"/>		
-	<property name="url" value="$jdbc.url}"/>	
-	<property name="username" value="${jdbc.userName}"/>
-	<property name="password" value="${jdbc.password}"/>
-</bean>
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
 <!-- 配置SqlSessionFactory -->
 <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	<property name="dataSource" ref="dataSource"></property>
 	<property name="mapperLocations">
 		<value>classpath:com/javasm/*/mapper/*.xml</value>
 	</property>
-	<!-- 如果要引mybatis的xml文件 -->
+	<!-- 如果要配置其他复杂的mybatis属性 可以单独写一个mybatis.xml 再按下面格式引入 -->
 	<!-- <property name="configLocation" value="classpath:mybatis-config.xml"></property> -->
 </bean>
 <!-- mapper注入到Spring容器中 -->
 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.javasm.*.dao" p:sqlSessionFactoryBeanName="sessionFactory"></bean>
-<!-- spring管理事务 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-<!-- 事物的过滤/生效规则 -->	
+<!-- Spring管理事务 -->
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"></property>
+</bean>
+<!-- 声明事物的过滤/生效规则 -->	
 <tx:advice id="txAdvice" transaction-manager="transactionManager">
-	<tx:attributes>
-		<!-- 所有add开头的方法 -->
-		<tx:method name="add*" propagation="REQUIRED"></tx:method>
-		<tx:method name="save*" propagation="REQUIRED"></tx:method>
-		<tx:method name="insert*" propagation="REQUIRED"></tx:method>
-		<tx:method name="delete*" propagation="REQUIRED"></tx:method>
-		<!-- 查询 -->
-		<tx:method name="find*" propagation="REQUIRED" read-only="true"></tx:method>
-		<tx:method name="select*" propagation="REQUIRED" read-only="true"></tx:method>
-		<tx:method name="*List" propagation="REQUIRED" read-only="true"></tx:method>
-		<!-- 声明回滚 -->
-		<tx:method name="*" rollback-for="Exception"></tx:method>
-	</tx:attributes>
+		<tx:attributes>
+			<!-- 所有add开头的方法 -->
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<!-- 查询 -->
+			<tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+			<tx:method name="select*" propagation="REQUIRED" read-only="true"/>
+			<tx:method name="*List" propagation="REQUIRED" read-only="true"/>
+			<!-- 声明回滚 -->
+			<tx:method name="*" rollback-for="Exception"/>
+		</tx:attributes>
 </tx:advice>
 <!-- 自动装配事物  必须放在<tx:advice>下方-->
 <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>

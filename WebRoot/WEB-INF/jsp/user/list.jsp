@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>'list.jsp'</title>
+    <title>用户列表页</title>
     
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="row">
 		  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		  <table>
+		  <table class="table table-striped">
 		  	<tr>
 		  		<th>ID</th>
 		  		<th>用户名</th>
@@ -35,11 +35,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  		<th>角色</th>
 		  		<th>操作</th>
 		  	</tr>
-		  <%-- 	<c:forEach item="${userList}" var="user"></c:forEach> --%>
+		  <c:forEach items="${userList}" var="user">
 		  	<tr>
-		  		<td></td>
+		  		<td>${user.id }</td>
+		  		<td>${user.userName }</td>
+		  		<td>${user.password }</td>
+		  		<td>${user.rid }</td>
+		  		<td>查看</td>
 		  	</tr>
-		  	
+		  </c:forEach> 
 		  </table>
 		  </div>
 		</div>

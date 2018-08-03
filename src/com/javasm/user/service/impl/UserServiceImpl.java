@@ -17,7 +17,6 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public List<UserModel> findUserList() {
 		List<UserModel> list=userDao.selectUserList();
-		
 		return list;
 	}
 
