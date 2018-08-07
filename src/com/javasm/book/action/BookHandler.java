@@ -1,7 +1,12 @@
 package com.javasm.book.action;
 
 import java.util.List;
-
+//log4j1引的包
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+//log4j2引的包
+/*import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +21,8 @@ import com.javasm.book.service.IBookService;
 @Controller
 @RequestMapping("/book")
 public class BookHandler {
+	Logger log=LogManager.getLogger(BookHandler.class);
+	
 	@Autowired
 	IBookService bookService;
 	
@@ -34,6 +41,9 @@ public class BookHandler {
 		//查询的数据放在分页对象里
 		PageInfo<Book> p = new PageInfo<>(list);
 		model.addAttribute("page",p);
+		log.debug("Debug日志测试");
+		log.info("info级别的日志");
+		log.error("error级别日志");
 		//JSON格式的时候只需要返回这个page对象即可 page中有list属性
 		return "book/list";
 	}

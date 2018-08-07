@@ -5,7 +5,7 @@ import java.util.List;
 import com.javasm.book.model.Book;
 
 public interface BookMapper {
-    int deleteByPrimaryKey(Long bid);
+	int deleteByPrimaryKey(Long bid);
 
     int insert(Book record);
 
@@ -18,5 +18,4 @@ public interface BookMapper {
     int updateByPrimaryKey(Book record);
     
     List<Book> selectBookList();
-    
 }

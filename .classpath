@@ -10,6 +10,7 @@
 	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.generic_7.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>

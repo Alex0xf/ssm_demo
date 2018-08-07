@@ -245,7 +245,7 @@
       read_count = #{readCount,jdbcType=INTEGER}
     where bid = #{bid,jdbcType=BIGINT}
   </update>
-  <!-- 查询列表 -->
+   <!-- 查询列表 -->
   <select id="selectBookList" resultMap="BaseResultMap">
   	select * from pn_book
   </select>

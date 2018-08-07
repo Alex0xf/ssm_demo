@@ -28,7 +28,7 @@
 		<value>classpath:com/javasm/*/mapper/*.xml</value>
 	</property>
 	<!-- 如果要配置其他复杂的mybatis属性 可以单独写一个mybatis.xml 再按下面格式引入 -->
-	<!-- <property name="configLocation" value="classpath:mybatis-config.xml"></property> -->
+<!-- 	<property name="configLocation" value="classpath:mybatis-config.xml"></property> -->
 	<!-- 配置分页插件 -->
 		<property name="plugins">
 			<array>
