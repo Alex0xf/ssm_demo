@@ -13,7 +13,17 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 <!-- 读取配置文件 -->
-<context:property-placeholder location="classpath:jdbc.properties"/>
+<!-- <context:property-placeholder location="classpath:jdbc.properties"/> -->
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:spring-redis.properties</value>
+			</list>
+		</property>
+		<!-- 外部配置文件 数据出错  保证代码继续运行 -->
+		<property name="ignoreUnresolvablePlaceholders" value="true"></property>
+	</bean>
 <!-- 数据库连接池 -->
 <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="driverClassName" value="${jdbc.driver}"></property>
@@ -28,7 +38,7 @@
 		<value>classpath:com/javasm/*/mapper/*.xml</value>
 	</property>
 	<!-- 如果要配置其他复杂的mybatis属性 可以单独写一个mybatis.xml 再按下面格式引入 -->
-<!-- 	<property name="configLocation" value="classpath:mybatis-config.xml"></property> -->
+	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 	<!-- 配置分页插件 -->
 		<property name="plugins">
 			<array>

@@ -10,6 +10,7 @@
 		<config>config/applicationContext.xml</config>
 		<config>config/applicationContext_mvc.xml</config>
 		<config>config/applicationContext_mybatis.xml</config>
+		<config>config/applicationContext_redis.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
