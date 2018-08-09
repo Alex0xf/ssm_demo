@@ -16,6 +16,8 @@
 	<import resource="classpath:applicationContext_mybatis.xml"/> 
 	<!-- 用Sprin管理redis 导入spring-redis配置文件 -->
 	<import resource="classpath:applicationContext_redis.xml"/> 
+	<!-- 定时任务 导入spring-quartz配置文件 -->
+	<import resource="classpath:applicationContext_quartz.xml"/> 
 
 	
 </beans>
