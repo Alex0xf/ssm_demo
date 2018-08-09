@@ -11,6 +11,7 @@
 		<config>config/applicationContext_mvc.xml</config>
 		<config>config/applicationContext_mybatis.xml</config>
 		<config>config/applicationContext_redis.xml</config>
+		<config>config/applicationContext_quarts.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

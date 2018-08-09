@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 定时任务/调度 定是去做一件事 -->
+	<bean id="testjob" class="com.javasm.timmer.MyJob"></bean>
+	<!-- 配置任务 执行testjob里的方法 -->
+	<bean id="testJobInvoking" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="testjob"></property>
+		<!-- 执行目标类的哪个方法 -->
+		<property name="targetMethod" value="doJob"></property>
+		<!-- 定时任务 不并发 -->
+		<property name="concurrent" value="false"></property>
+	</bean>
+
+	<!-- 任务调度执行规则 -->		
+	<!-- <bean id="testJobInvodingCron" class="org.">
+	
+	</bean> -->
+
+</beans>
