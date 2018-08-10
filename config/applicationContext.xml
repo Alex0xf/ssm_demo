@@ -12,7 +12,7 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
 	</context:component-scan>
-	<!-- 用Sprin管理mubatis 导入spring-mybatis配置文件 -->
+	<!-- 用Sprin管理mybatis 导入spring-mybatis配置文件 -->
 	<import resource="classpath:applicationContext_mybatis.xml"/> 
 	<!-- 用Sprin管理redis 导入spring-redis配置文件 -->
 	<import resource="classpath:applicationContext_redis.xml"/> 

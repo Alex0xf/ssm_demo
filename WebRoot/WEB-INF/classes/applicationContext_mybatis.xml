@@ -12,8 +12,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
-<!-- 读取配置文件 -->
+<!-- 读取配置文件  基于占位符方式 配置单个properties-->
 <!-- <context:property-placeholder location="classpath:jdbc.properties"/> -->
+<!-- 基于占位符方式 配置多个properties java代码中可以通过@value{jdbc.url}注解直接获取jdbc.properties文件中的值注入 private String url;  -->
 <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
@@ -24,6 +25,19 @@
 		<!-- 外部配置文件 数据出错  保证代码继续运行 -->
 		<property name="ignoreUnresolvablePlaceholders" value="true"></property>
 	</bean>
+	
+ <!--基于SpEL表达式 配置多个properties id值为configProperties 提供java代码中使用  @Value("#{configProperties['jdbc.username']}") -->
+   <!--  <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:/conf/jdbc.properties</value>
+            </list>
+        </property>
+    </bean> -->
+
+    <!--基于SpEL表达式 配置单个properties -->
+    <!--<util:properties id="configProperties" location="classpath:conf/jdbc.properties"/>-->
+
 <!-- 数据库连接池 -->
 <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="driverClassName" value="${jdbc.driver}"></property>

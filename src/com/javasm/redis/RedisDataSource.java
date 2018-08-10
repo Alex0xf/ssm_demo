@@ -31,6 +31,7 @@ public class RedisDataSource {
 	    shardedJedisPool.returnResourceObject(shardedJedis);  
 	}  
   
+	@SuppressWarnings("deprecation")
 	public void returnResource(ShardedJedis shardedJedis, boolean broken) {  
 	 if (broken) {  
 	        shardedJedisPool.returnBrokenResource(shardedJedis);  

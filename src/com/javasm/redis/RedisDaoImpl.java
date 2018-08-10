@@ -188,7 +188,7 @@ public class RedisDaoImpl extends RedisDaoSupport implements RedisDao {
 	}
 
 	@Override
-	public Map hgetAll(String key) {
+	public Map<?, ?> hgetAll(String key) {
 		return getRedisTemplate().hgetAll(key);
 	}
 

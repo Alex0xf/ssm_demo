@@ -314,7 +314,8 @@ public interface RedisDao {
 	 * @return Map  
 	 * @throws
 	 */
-	Map hgetAll(String key);
+	Map<?, ?> hgetAll(String key);
+	//Map hgetAll(String key);
 
 	/**
 	  * @Title: hlen 
