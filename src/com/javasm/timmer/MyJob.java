@@ -15,6 +15,7 @@ import com.javasm.util.HttpClientDemo;
  * @author Alex
  * @date 2018年8月9日
  */
+
 public class MyJob {
 	
 	@Autowired
